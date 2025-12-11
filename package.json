@@ -1,0 +1,24 @@
+{
+  "name": "stocktradingapp",
+  "version": "1.0.0",
+  "description": "\"# StockTradingApp\"",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheJoker12321/StockTradingApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/TheJoker12321/StockTradingApp/issues"
+  },
+  "homepage": "https://github.com/TheJoker12321/StockTradingApp#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
