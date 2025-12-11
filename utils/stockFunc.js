@@ -134,7 +134,7 @@ function analyzeMarketTrends() {
     }
 }
 
-console.log(average("oil"));
+
 
 
 export {
