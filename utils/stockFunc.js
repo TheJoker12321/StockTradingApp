@@ -61,10 +61,85 @@ function OperateOnStock(operation, identifier) {
 }
 
 
+function checkTopGrow(status) {
+    let topStock = []
+    for (const stock of stockMarket.stocks) {
+        if (stock.previousPrices.length === 0) {
+            continue
+        }
+        if (topStock.length < 3) {
+            topStock.push(stock)
+        } else {
+            for (const top of topStock) {
+                if (status === 'increase') {
+                    if (stock.currentPrice - stock.previousPrices[stock.previousPrices.length - 1] > top.currentPrice - top.previousPrices[top.previousPrices.length - 1]) {
+                        topStock.splice(topStock.indexOf(top), 1, stock)
+                    } 
+
+                } else if (status === 'decrease') {
+                    if (stock.currentPrice - stock.previousPrices[stock.previousPrices.length - 1] < top.currentPrice - top.previousPrices[top.previousPrices.length - 1]) {
+                        topStock.splice(topStock.indexOf(top), 1, stock)
+                    }
+                }
+            }
+        }
+    }
+    return topStock
+}
+
+function mostVolatile() {
+    let maxVol = 0
+    let maxVolStock = stockMarket.stocks[0]
+    for (const stock of stockMarket.stocks) {
+        let sum = 1
+        sum += stock.previousPrices.length
+        if (sum > maxVol) {
+            maxVol = sum
+            maxVolStock = stock.name
+        }
+    }
+    return maxVolStock
+}
+
+function average(category) {
+    let sumActive = 0
+    let numberCategory = 0
+    for (const stock of stockMarket.stocks) {
+        if (stock.category === category) {
+            sumActive += stock.previousPrices.length
+            numberCategory += 1
+        }
+    }
+    
+    
+    return sumActive / numberCategory
+}
+
+function analyzeMarketTrends() {
+    let topGrow =checkTopGrow('increase')
+    let topGrowDown = checkTopGrow('decrease')
+    let mostVol = mostVolatile()
+    return {
+        topIncreasingStocks: topGrow,
+        topDecreasingStocks: topGrowDown,
+        mostVolatileStock: mostVol,
+        categoryStability: {
+            education: average('education'),
+            AI: average('AI'),
+            factories: average('factories'),
+            generalTech: average('general tech'),
+            oil: average('oil'),
+            greenEnergy: average('green energy')
+        }
+    }
+}
+
+console.log(average("oil"));
 
 
 export {
     searchStock,
     filterStocksByPrice,
-    OperateOnStock
+    OperateOnStock,
+    analyzeMarketTrends
 }
