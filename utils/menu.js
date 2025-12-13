@@ -1,6 +1,7 @@
 import {searchStock,
-    filterStocksByPrice,
-    OperateOnStock} from './stockFunc.js'
+        filterStocksByPrice,
+        OperateOnStock,
+        analyzeMarketTrends} from './stockFunc.js'
 
 import readline from 'readline-sync'
 
@@ -13,6 +14,7 @@ ________________________________________
 1. Search for a stock by name or id.
 2. Show all stocks above or below a given price.
 3. Buy or sell a stock.
+4. if you want to see about the stocks
 0. Exit
 ________________________________________
 `)
@@ -37,6 +39,10 @@ ________________________________________
                 let operation = readline.question("Enter the operation (buy or sell): ")
                 identifier = readline.question("Enter the identifier (name or id): ")
                 OperateOnStock(operation, identifier)
+                break
+
+            case 4:
+                console.log(analyzeMarketTrends())
                 break
 
             case 0:
